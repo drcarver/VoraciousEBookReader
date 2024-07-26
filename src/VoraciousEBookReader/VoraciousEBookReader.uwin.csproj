@@ -391,12 +391,6 @@
       <Version>0.37.2</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VoraciousEBookReader.EPUB\VoraciousEBookReader.EPUB.csproj">
-      <Project>{abbf48be-1e2f-45b8-9000-49ce821add23}</Project>
-      <Name>VoraciousEBookReader.EPUB</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

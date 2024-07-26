@@ -6,7 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VoraciousEBookReader.EPUB\VoraciousEBookReader.EPUB.csproj" />
+    <Compile Remove="GutenbergDownloader.cs" />
+    <Compile Remove="GutenbergFileWizard.cs" />
+    <Compile Remove="NullIndexReader.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enum\" />
   </ItemGroup>
 
 </Project>
