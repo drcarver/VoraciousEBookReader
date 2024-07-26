@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 
+using VoraciousEBookReader.EPUB.Enum;
 using VoraciousEBookReader.EPUB.Extensions;
 
 namespace VoraciousEBookReader.EPUB

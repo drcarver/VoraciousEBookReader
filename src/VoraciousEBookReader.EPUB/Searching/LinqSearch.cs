@@ -92,11 +92,11 @@ namespace VoraciousEBookReader.EPUB.Searching
             }
 
             if (idlist != null) queryList = queryList.Where(b => idlist.Contains(b.BookId));
-            switch (includes.HasFlag)
-            {
-                case LinqIncludes.People:
+            //switch (includes.HasFlag)
+            //{
+            //    case LinqIncludes.People:
 
-            }
+            //}
             if (includes.HasFlag(LinqIncludes.People)) queryList = queryList.Include(b => b.People);
             if (includes.HasFlag(LinqIncludes.Notes)) queryList = queryList.Include(b => b.BookNotes).Include(b => b.BookNotes.Notes);
             if (includes.HasFlag(LinqIncludes.Review)) queryList = queryList.Include(b => b.Review);
@@ -123,17 +123,17 @@ namespace VoraciousEBookReader.EPUB.Searching
                     // which means when I switch computers, all the books I've downloaded read and finished
                     // will show up in the list?
                     matchList = queryList
-                        .Where(b => b.Download == null || b.Download.CurrFileStatus != Download.FileStatus.Downloaded)
+                        .Where(b => b.Download == null || b.Download.CurrFileStatus != FileStatus.Downloaded)
                         .Where(b => b.Navigation == null
-                            || b.NavigationData.NSwipeLeft < 1
-                                && b.NavigationData.CurrStatus == UserStatus.NoStatus
+                            || b.Navigation.NSwipeLeft < 1
+                                && b.Navigation.CurrStatus == UserStatus.NoStatus
                             )
                         ;
                     mustIncludeEpub = true;
                     break;
                 case "Downloaded":
                     matchList = queryList
-                        .Where(b => b.Download != null && b.Download.CurrFileStatus == Download.FileStatus.Downloaded)
+                        .Where(b => b.Download != null && b.Download.CurrFileStatus == FileStatus.Downloaded)
                         .Where(b => b.Navigation == null
                             || b.Navigation.NSwipeLeft < 1
                                 && b.Navigation.CurrStatus == UserStatus.NoStatus
@@ -142,7 +142,7 @@ namespace VoraciousEBookReader.EPUB.Searching
                     break;
                 case "Reading":
                     matchList = queryList
-                        .Where(b => b.Download != null && b.Download.CurrFileStatus == Download.FileStatus.Downloaded)
+                        .Where(b => b.Download != null && b.Download.CurrFileStatus == FileStatus.Downloaded)
                         .Where(b => b.Navigation != null)
                         .Where(b => b.Navigation.NSwipeLeft < 1)
                         .Where(b => b.Navigation.CurrStatus == UserStatus.Reading)
