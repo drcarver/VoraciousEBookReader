@@ -1,0 +1,331 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>VoraciousEBookReader.MAUI</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>VoraciousEBookReader.MAUI</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.voraciousebookreader.maui</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\HelpFiles\HelpFileImages\Example-eBook-Reader-Sketch.png" />
+	  <None Remove="Assets\HelpFiles\HelpFileImages\Windows-Explorer-With-eBook-Reader.png" />
+	  <None Remove="Assets\HelpScreenShots\010-About-Voracious-Ebook-Reader.png" />
+	  <None Remove="Assets\HelpScreenShots\015-Right-pane-for-reading.png" />
+	  <None Remove="Assets\HelpScreenShots\020-Left-side-chapters.png" />
+	  <None Remove="Assets\HelpScreenShots\025-Left-side-images.png" />
+	  <None Remove="Assets\HelpScreenShots\030-Left-side-new-books.png" />
+	  <None Remove="Assets\HelpScreenShots\050-Reading.png" />
+	  <None Remove="Assets\HelpScreenShots\051-Reading-NextPage.png" />
+	  <None Remove="Assets\HelpScreenShots\052-Reading-Buttons.png" />
+	  <None Remove="Assets\HelpScreenShots\053-Reading-AllUpBar.png" />
+	  <None Remove="Assets\HelpScreenShots\054-Reading-Review.png" />
+	  <None Remove="Assets\HelpScreenShots\121-Review-Page.png" />
+	  <None Remove="Assets\HelpScreenShots\122-Review-Star.png" />
+	  <None Remove="Assets\HelpScreenShots\123-Review-Hashtag.png" />
+	  <None Remove="Assets\HelpScreenShots\124-Review-Done.png" />
+	  <None Remove="Assets\HelpScreenShots\125-Review-Markdown.png" />
+	  <None Remove="Assets\HelpScreenShots\130-Notes-Button.png" />
+	  <None Remove="Assets\HelpScreenShots\140-Finish-Button.png" />
+	  <None Remove="Assets\HelpScreenShots\141-Finish-Menu.png" />
+	  <None Remove="Assets\HelpScreenShots\150-Chapter-List.png" />
+	  <None Remove="Assets\HelpScreenShots\160-Image-List.png" />
+	  <None Remove="Assets\HelpScreenShots\161-Image-Zoom.png" />
+	  <None Remove="Assets\HelpScreenShots\170-Notes-List.png" />
+	  <None Remove="Assets\HelpScreenShots\180-Research.png" />
+	  <None Remove="Assets\HelpScreenShots\290-Search-Downlaoded.png" />
+	  <None Remove="Assets\HelpScreenShots\290-Search-Downloaded.png" />
+	  <None Remove="Assets\HelpScreenShots\291-Search-Current.png" />
+	  <None Remove="Assets\HelpScreenShots\292-Search-Done.png" />
+	  <None Remove="Assets\HelpScreenShots\293-Search-Allpng.png" />
+	  <None Remove="Assets\HelpScreenShots\294-Search-Download.png" />
+	  <None Remove="Assets\HelpScreenShots\295-Search-Elements.png" />
+	  <None Remove="Assets\Icons\Giuseppe-arcimboldo-the-librarian.jpg" />
+	  <None Remove="Assets\Icons\LargeTile.png" />
+	  <None Remove="Assets\Icons\LargeTile.scale-100.png" />
+	  <None Remove="Assets\Icons\SmallTile.scale-100.png" />
+	  <None Remove="Assets\Icons\SmallTile.scale-125.png" />
+	  <None Remove="Assets\Icons\SmallTile.scale-150.png" />
+	  <None Remove="Assets\Icons\SmallTile.scale-200.png" />
+	  <None Remove="Assets\Icons\SmallTile.scale-400.png" />
+	  <None Remove="Assets\Icons\SplashScreen.png" />
+	  <None Remove="Assets\Icons\SplashScreen.scale-100.png" />
+	  <None Remove="Assets\Icons\SplashScreen.scale-125.png" />
+	  <None Remove="Assets\Icons\SplashScreen.scale-150.png" />
+	  <None Remove="Assets\Icons\Square150x150Logo.scale-100.png" />
+	  <None Remove="Assets\Icons\Square150x150Logo.scale-125.png" />
+	  <None Remove="Assets\Icons\Square150x150Logo.scale-150.png" />
+	  <None Remove="Assets\Icons\Square150x150Logo.scale-200.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-16.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-24.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-256.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-32.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-48.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.scale-100.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.scale-125.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.scale-150.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.scale-200.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.scale-400.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.targetsize-16.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.targetsize-24.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.targetsize-256.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.targetsize-32.png" />
+	  <None Remove="Assets\Icons\Square44x44Logo.targetsize-48.png" />
+	  <None Remove="Assets\Icons\StoreLogo.scale-100.png" />
+	  <None Remove="Assets\Icons\StoreLogo.scale-125.png" />
+	  <None Remove="Assets\Icons\StoreLogo.scale-150.png" />
+	  <None Remove="Assets\Icons\StoreLogo.scale-200.png" />
+	  <None Remove="Assets\Icons\StoreLogo.scale-400.png" />
+	  <None Remove="Assets\Icons\Wide310x150Logo.png" />
+	  <None Remove="Assets\Icons\Wide310x150Logo.scale-100.png" />
+	  <None Remove="Assets\Icons\Wide310x150Logo.scale-125.png" />
+	  <None Remove="Assets\Icons\Wide310x150Logo.scale-150.png" />
+	  <None Remove="Assets\InitialBooks.zip" />
+	  <None Remove="Assets\LockScreenLogo.scale-200.png" />
+	  <None Remove="Assets\PreinstalledBooks\Alices_Adventures_in_by_Carroll_Lewis.EPUB" />
+	  <None Remove="Assets\PreinstalledBooks\Meditations_by_Marcus_Aurelius_Emperor.EPUB" />
+	  <None Remove="Assets\PreinstalledBooks\Narrative_of_the_Life_by_Douglass_Frederick.EPUB" />
+	  <None Remove="Assets\PreinstalledBooks\The_Adventures_of_Sherlock_by_Doyle_Arthur_Conan.EPUB" />
+	  <None Remove="Assets\PreinstalledBooks\The_Mysterious_Affair_by_Christie_Agatha.EPUB" />
+	  <None Remove="Assets\SplashScreen.scale-200.png" />
+	  <None Remove="Assets\Square150x150Logo.scale-200.png" />
+	  <None Remove="Assets\Square44x44Logo.scale-200.png" />
+	  <None Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+	  <None Remove="Assets\StoreLogo.png" />
+	  <None Remove="Assets\Wide310x150Logo.scale-200.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Assets\HelpFiles\HelpFileImages\Example-eBook-Reader-Sketch.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpFiles\HelpFileImages\Windows-Explorer-With-eBook-Reader.png" />
+	  <Content Include="Assets\HelpScreenShots\010-About-Voracious-Ebook-Reader.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\015-Right-pane-for-reading.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\020-Left-side-chapters.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\025-Left-side-images.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\030-Left-side-new-books.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\050-Reading.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\051-Reading-NextPage.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\052-Reading-Buttons.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\053-Reading-AllUpBar.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\054-Reading-Review.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\121-Review-Page.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\122-Review-Star.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\123-Review-Hashtag.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\124-Review-Done.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\125-Review-Markdown.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\130-Notes-Button.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\140-Finish-Button.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\141-Finish-Menu.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\150-Chapter-List.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\160-Image-List.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\161-Image-Zoom.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\170-Notes-List.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\180-Research.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\290-Search-Downlaoded.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\290-Search-Downloaded.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\291-Search-Current.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\292-Search-Done.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\293-Search-Allpng.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\294-Search-Download.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\HelpScreenShots\295-Search-Elements.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\Icons\Giuseppe-arcimboldo-the-librarian.jpg" />
+	  <Content Include="Assets\Icons\LargeTile.png" />
+	  <Content Include="Assets\Icons\LargeTile.scale-100.png" />
+	  <Content Include="Assets\Icons\SmallTile.scale-100.png" />
+	  <Content Include="Assets\Icons\SmallTile.scale-125.png" />
+	  <Content Include="Assets\Icons\SmallTile.scale-150.png" />
+	  <Content Include="Assets\Icons\SmallTile.scale-200.png" />
+	  <Content Include="Assets\Icons\SmallTile.scale-400.png" />
+	  <Content Include="Assets\Icons\SplashScreen.png" />
+	  <Content Include="Assets\Icons\SplashScreen.scale-100.png" />
+	  <Content Include="Assets\Icons\SplashScreen.scale-125.png" />
+	  <Content Include="Assets\Icons\SplashScreen.scale-150.png" />
+	  <Content Include="Assets\Icons\Square150x150Logo.scale-100.png" />
+	  <Content Include="Assets\Icons\Square150x150Logo.scale-125.png" />
+	  <Content Include="Assets\Icons\Square150x150Logo.scale-150.png" />
+	  <Content Include="Assets\Icons\Square150x150Logo.scale-200.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-16.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-24.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-256.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-32.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.altform-unplated_targetsize-48.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.scale-100.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.scale-125.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.scale-150.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.scale-200.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.scale-400.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.targetsize-16.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.targetsize-24.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.targetsize-256.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.targetsize-32.png" />
+	  <Content Include="Assets\Icons\Square44x44Logo.targetsize-48.png" />
+	  <Content Include="Assets\Icons\StoreLogo.scale-100.png" />
+	  <Content Include="Assets\Icons\StoreLogo.scale-125.png" />
+	  <Content Include="Assets\Icons\StoreLogo.scale-150.png" />
+	  <Content Include="Assets\Icons\StoreLogo.scale-200.png" />
+	  <Content Include="Assets\Icons\StoreLogo.scale-400.png" />
+	  <Content Include="Assets\Icons\Wide310x150Logo.png" />
+	  <Content Include="Assets\Icons\Wide310x150Logo.scale-100.png" />
+	  <Content Include="Assets\Icons\Wide310x150Logo.scale-125.png" />
+	  <Content Include="Assets\Icons\Wide310x150Logo.scale-150.png" />
+	  <Content Include="Assets\InitialBooks.zip">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\LockScreenLogo.scale-200.png" />
+	  <Content Include="Assets\PreinstalledBooks\Alices_Adventures_in_by_Carroll_Lewis.EPUB">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\PreinstalledBooks\Meditations_by_Marcus_Aurelius_Emperor.EPUB">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\PreinstalledBooks\Narrative_of_the_Life_by_Douglass_Frederick.EPUB">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\PreinstalledBooks\The_Adventures_of_Sherlock_by_Doyle_Arthur_Conan.EPUB">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\PreinstalledBooks\The_Mysterious_Affair_by_Christie_Agatha.EPUB">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\SplashScreen.scale-200.png" />
+	  <Content Include="Assets\Square150x150Logo.scale-200.png" />
+	  <Content Include="Assets\Square44x44Logo.scale-200.png" />
+	  <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+	  <Content Include="Assets\StoreLogo.png" />
+	  <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Assets\HelpFiles\HelpeBookReader.md">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>

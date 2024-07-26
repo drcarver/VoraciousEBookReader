@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{9C05FD09-9FA5-4F7D-BF36-29470C0AD94B}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimpleEpubReader</RootNamespace>
+    <AssemblyName>SimpleEpubReader</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateKeyFile>VoraciousEBookReader_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <PackageCertificateThumbprint>
+    </PackageCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;FULL_EREADER</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008;0618</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <SuppressXamlWarnings>1500</SuppressXamlWarnings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\EF_Is_Just_Plain_Dumb\Migrations\20200521055206_CreateBookData.cs">
+      <Link>Database\Migrations\20200521055206_CreateBookData.cs</Link>
+    </Compile>
+    <Compile Include="..\EF_Is_Just_Plain_Dumb\Migrations\20200521055206_CreateBookData.Designer.cs">
+      <Link>Database\Migrations\20200521055206_CreateBookData.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\EF_Is_Just_Plain_Dumb\Migrations\BookDataContextModelSnapshot.cs">
+      <Link>Database\Migrations\BookDataContextModelSnapshot.cs</Link>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AllUpBookPosition.xaml.cs">
+      <DependentUpon>AllUpBookPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BookCard.xaml.cs">
+      <DependentUpon>BookCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EBookFolder.cs" />
+    <Compile Include="Controls\EBookReaderMark.xaml.cs">
+      <DependentUpon>EBookReaderMark.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EBookReaderPickAndSend.xaml.cs">
+      <DependentUpon>EBookReaderPickAndSend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EbookReaderProgressControl.xaml.cs">
+      <DependentUpon>EbookReaderProgressControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HelperBookDataWithSelected.cs" />
+    <Compile Include="Controls\ReviewNoteStatusListControl.xaml.cs">
+      <DependentUpon>ReviewNoteStatusListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BookSearch.xaml.cs">
+      <DependentUpon>BookSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChapterDisplay.xaml.cs">
+      <DependentUpon>ChapterDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomizeControl.xaml.cs">
+      <DependentUpon>CustomizeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HelpControl.xaml.cs">
+      <DependentUpon>HelpControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageList.xaml.cs">
+      <DependentUpon>ImageList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainEpubReader.xaml.cs">
+      <DependentUpon>MainEpubReader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MarkdownEditor.xaml.cs">
+      <DependentUpon>MarkdownEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NoteCard.xaml.cs">
+      <DependentUpon>NoteCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NoteEditor.xaml.cs">
+      <DependentUpon>NoteEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NoteList.xaml.cs">
+      <DependentUpon>NoteList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PersonCard.xaml.cs">
+      <DependentUpon>PersonCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PickLanguageControl.xaml.cs">
+      <DependentUpon>PickLanguageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectRomeActivity.cs" />
+    <Compile Include="Controls\ReviewNoteStatusControl.xaml.cs">
+      <DependentUpon>ReviewNoteStatusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WebSearch.xaml.cs">
+      <DependentUpon>WebSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Database\BookData.cs" />
+    <Compile Include="Database\BookMarkFile.cs" />
+    <Compile Include="Database\CommonQueries.cs" />
+    <Compile Include="Database\GutenbergDownloadControl.xaml.cs">
+      <DependentUpon>GutenbergDownloadControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GutenbergDownloader.cs" />
+    <Compile Include="Database\InitializeFilesToGet.cs" />
+    <Compile Include="Database\LinqSearch.cs" />
+    <Compile Include="Database\RdfReader.cs" />
+    <Compile Include="Database\UserData.cs" />
+    <Compile Include="FileWizards\CssFixup.cs" />
+    <Compile Include="FileWizards\EpubWizard.cs" />
+    <Compile Include="FileWizards\GutenbergFileWizard.cs" />
+    <Compile Include="FileWizards\HtmlFixup.cs" />
+    <Compile Include="FileWizards\TextWizard.cs" />
+    <Compile Include="FileWizards\UriWizard.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="MainInitializationPage.xaml.cs">
+      <DependentUpon>MainInitializationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserCustomization.cs" />
+    <Compile Include="UwpClasses\BookmarkFileDirectory.cs" />
+    <Compile Include="UwpClasses\FileMethods.cs" />
+    <Compile Include="UwpClasses\FolderMethods.cs" />
+    <Compile Include="UwpClasses\HttpProgressConverter.cs" />
+    <Compile Include="UwpClasses\SimpleDialogs.cs" />
+    <Compile Include="UwpClasses\UwpRangeConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Properties\Default.rd.xml" />
+    <None Include="VoraciousEBookReader_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\AllUpBookPosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BookCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BookSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChapterDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CustomizeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EBookReaderMark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EBookReaderPickAndSend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EbookReaderProgressControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HelpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainEpubReader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MarkdownEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NoteCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NoteEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NoteList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PersonCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PickLanguageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReviewNoteStatusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReviewNoteStatusListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WebSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Database\GutenbergDownloadControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainInitializationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ExCSS">
+      <Version>4.2.5</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore">
+      <Version>3.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
+      <Version>3.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>7.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="PCLStorage">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="sharpcompress">
+      <Version>0.37.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoraciousEBookReader.EPUB\VoraciousEBookReader.EPUB.csproj">
+      <Project>{abbf48be-1e2f-45b8-9000-49ce821add23}</Project>
+      <Name>VoraciousEBookReader.EPUB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
