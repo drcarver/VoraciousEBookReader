@@ -17,8 +17,9 @@
 		<RootNamespace>VoraciousEBookReader.EBookReader</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
+		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<LangVersion>12.0</LangVersion>
 
 		<!-- Display name -->
 		<ApplicationTitle>VoraciousEBookReader.EBookReader</ApplicationTitle>
@@ -54,6 +55,17 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="BookHandler.cs" />
+	  <Compile Remove="BookLocation.cs" />
+	  <Compile Remove="EpubBookExt.cs" />
+	  <Compile Remove="INavigateTo.cs" />
+	  <Compile Remove="ISetAppColors.cs" />
+	  <Compile Remove="NavigateControlId.cs" />
+	  <Compile Remove="Navigator.cs" />
+	  <Compile Remove="Navigator.ISelectTo.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -244,9 +256,6 @@
 	  <Content Include="Resources\AppIcon\Wide310x150Logo.scale-100.png" />
 	  <Content Include="Resources\AppIcon\Wide310x150Logo.scale-125.png" />
 	  <Content Include="Resources\AppIcon\Wide310x150Logo.scale-150.png" />
-	  <Content Include="Assets\InitialBooks.zip">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
 	  <Content Include="Assets\LockScreenLogo.scale-200.png" />
 	  <Content Include="Assets\PreinstalledBooks\Alices_Adventures_in_by_Carroll_Lewis.EPUB">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -273,9 +282,15 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Serilog" Version="4.0.1" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>

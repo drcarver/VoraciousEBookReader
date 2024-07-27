@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoraciousEBookReaderConsole
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoraciousEBookReader.Gutenberg", "VoraciousEBookReader.Gutenberg\VoraciousEBookReader.Gutenberg.csproj", "{D90A18C4-9DF7-49AE-935E-5AECC036397C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoraciousEBookReader.EBookReader", "VoraciousEBookReader.EBookReader\VoraciousEBookReader.EBookReader.csproj", "{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,36 @@ Global
 		{D90A18C4-9DF7-49AE-935E-5AECC036397C}.Release|x64.Build.0 = Release|Any CPU
 		{D90A18C4-9DF7-49AE-935E-5AECC036397C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D90A18C4-9DF7-49AE-935E-5AECC036397C}.Release|x86.Build.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|ARM.Build.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|ARM.Deploy.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|ARM64.Deploy.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|x64.Build.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|x86.Build.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|ARM.ActiveCfg = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|ARM.Build.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|ARM.Deploy.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|ARM64.Build.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|ARM64.Deploy.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x64.ActiveCfg = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x64.Build.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x64.Deploy.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x86.ActiveCfg = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x86.Build.0 = Release|Any CPU
+		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
