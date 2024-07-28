@@ -7,7 +7,7 @@ namespace VoraciousEBookReader.Gutenberg.Model
     /// <summary>
     /// The model for the Gutenberg catalog
     /// </summary>
-    public class CatalogEntry : ICatalogEntry
+    public class GutenbergCatalogEntry : IGutenbergCatalogEntry
     {
         public int EbookNumber { get; set; }
         public string EPubType { get; set; }

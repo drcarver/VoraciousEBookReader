@@ -1,12 +1,10 @@
-﻿using System;
-
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using VoraciousEBookReader.Gutenberg.Interface;
 
 namespace VoraciousEBookReader.Gutenberg.ViewModel
 {
-    public partial class CatalogEntryViewModel : ObservableObject, ICatalogEntry
+    public partial class CatalogEntryViewModel : ObservableObject, IGutenbergCatalogEntry
     {
         [ObservableProperty]
         private string authors;
@@ -34,5 +32,29 @@ namespace VoraciousEBookReader.Gutenberg.ViewModel
 
         [ObservableProperty]
         private string title;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="entry">The catalog entry to create</param>
+        public CatalogEntryViewModel(IGutenbergCatalogEntry entry)
+        {
+            Authors = entry.Authors;
+            Bookshelves = entry.Bookshelves;
+            EbookNumber = entry.EbookNumber;
+            EPubType = entry.EPubType;
+            Issued = entry.Issued;
+            Language = entry.Language;
+            LoCC = entry.LoCC;
+            Subjects = entry.Subjects;
+            Title = entry.Title;
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CatalogEntryViewModel()
+        {
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace VoraciousEBookReader.Gutenberg.Interface
 {
-    public interface ICatalogEntry
+    public interface IGutenbergCatalogEntry
     {
         string Authors { get; set; }
         string Bookshelves { get; set; }

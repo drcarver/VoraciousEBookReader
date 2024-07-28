@@ -10,10 +10,10 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        Log.Logger = new LoggerConfiguration()
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .CreateLogger();
+        //Log.Logger = new LoggerConfiguration()
+        //    .Enrich.FromLogContext()
+        //    .WriteTo.Console()
+        //    .CreateLogger();
 
         var builder = MauiApp.CreateBuilder();
         builder
