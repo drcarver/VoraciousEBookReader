@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using VoraciousEBookReader.Gutenberg.Interface;
+using VoraciousEBookReader.Gutenberg.Model;
 
 namespace VoraciousEBookReader.Gutenberg.ViewModel
 {
@@ -37,7 +38,7 @@ namespace VoraciousEBookReader.Gutenberg.ViewModel
         /// Constructor
         /// </summary>
         /// <param name="entry">The catalog entry to create</param>
-        public CatalogEntryViewModel(IGutenbergCatalogEntry entry)
+        public CatalogEntryViewModel(GutenbergCatalogEntry entry)
         {
             Authors = entry.Authors;
             Bookshelves = entry.Bookshelves;

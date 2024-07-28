@@ -6,12 +6,12 @@ namespace VoraciousEBookReader.Gutenberg.Map
     /// <summary>
     /// The CSV map for the Gutenberg catalog
     /// </summary>
-    internal sealed class CatalogEntryMap : ClassMap<CatalogEntry>
+    internal sealed class GutenbergCatalogEntryMap : ClassMap<GutenbergCatalogEntry>
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        internal CatalogEntryMap()
+        internal GutenbergCatalogEntryMap()
         {
             Map(x => x.EbookNumber).Name("Text#");
             Map(x => x.EPubType).Name("Type");

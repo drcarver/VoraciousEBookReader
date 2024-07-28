@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 using VoraciousEBookReader.Gutenberg.Interface;
-using VoraciousEBookReader.Gutenberg.Model;
+using VoraciousEBookReader.Gutenberg.Service;
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg
@@ -19,7 +19,7 @@ namespace VoraciousEBookReader.Gutenberg
             // Add all the game table types as transient
             collection
                 .AddTransient<IGutenbergCatalogEntry, CatalogEntryViewModel>()
-                .AddSingleton<ICatalog, CatalogViewModel>()
+                .AddSingleton<IGutenbergCatalogService, GutenbergCatalogService>()
                 ;
 
             return collection;

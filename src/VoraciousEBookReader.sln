@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoraciousEBookReader.Gutenb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoraciousEBookReader.EBookReader", "VoraciousEBookReader.EBookReader\VoraciousEBookReader.EBookReader.csproj", "{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoraciousEBookReader.Database", "VoraciousEBookReader.Database\VoraciousEBookReader.Database.csproj", "{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,26 @@ Global
 		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x86.ActiveCfg = Release|Any CPU
 		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x86.Build.0 = Release|Any CPU
 		{43B5D9DD-84BD-46EC-A4AC-C22AF40D5856}.Release|x86.Deploy.0 = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|x64.Build.0 = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Debug|x86.Build.0 = Debug|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|ARM.Build.0 = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|ARM64.Build.0 = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|x64.ActiveCfg = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|x64.Build.0 = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|x86.ActiveCfg = Release|Any CPU
+		{9DAEE9E5-B58A-41C7-8D9A-2EEA86637E36}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
