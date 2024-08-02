@@ -1,5 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 using System.IO.Compression;
+using System.Text;
 using System.Text.Json;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,6 +11,7 @@ using CommunityToolkit.Mvvm.Input;
 using CsvHelper;
 using CsvHelper.Configuration;
 
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using Microsoft.Extensions.Logging;
 
 using VoraciousEBookReader.Gutenberg.Interface;
@@ -92,26 +96,23 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             Directory.CreateDirectory(fileInfo?.DirectoryName);
             logger.LogInformation($"Loading catalog from {fPath}");
             HttpClient client = HttpClientFactory.CreateClient();
-            var list = new List<GutenbergCatalogEntry>();
-            using (var streamReader = new StreamReader(await client.GetStreamAsync(CATALOGURL)))
+            ObservableCollection<GutenbergCatalogEntryViewModel> list = [];
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            { 
+                HasHeaderRecord = true, 
+                Delimiter = ",", 
+                BadDataFound = null, 
+                MissingFieldFound = null 
+            }; 
+            using (var csv = new CsvReader(new StreamReader(await client.GetStreamAsync(CATALOGURL)), config))
             {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    HasHeaderRecord = true,
-                    Delimiter = ",",
-                    BadDataFound = null,
-                    MissingFieldFound = null
-                };
-                using (var csv = new CsvReader(streamReader, config))
-                {
-                    csv.Context.RegisterClassMap<GutenbergCatalogEntryMap>();
-                    list = csv.GetRecords<GutenbergCatalogEntry>().ToList();
-                }
+                csv.Context.RegisterClassMap<GutenbergCatalogEntryViewModelMap>();
+                GutenbergCatalog.Catalog = new ObservableCollection<GutenbergCatalogEntryViewModel>(csv.GetRecords<GutenbergCatalogEntryViewModel>());
             }
             GutenbergCatalog.LastUpdated = DateTime.Now;
             logger.LogInformation($"Loaded catalog with {GutenbergCatalog.Catalog.Count} entries.");
 
-            string json = JsonSerializer.Serialize(this);
+            string json = JsonSerializer.Serialize(GutenbergCatalog);
             File.WriteAllText(fPath, json);
             using (var originalFileStream = File.Open(fPath, FileMode.Open))
             {
@@ -126,11 +127,6 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             }
             // delete the uncompressed list
             File.Delete(fPath);
-
-            foreach (var item in list)
-            {
-                GutenbergCatalog.Catalog.Add(new GutenbergCatalogEntryViewModel(item));
-            }
         }
         catch (Exception ex)
         {
@@ -166,6 +162,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                 logger.LogError($"Error {ex.Message} loading catalog from {fPath}");
                 throw ex;
             }
+            logger.LogInformation($"Loaded catalog from {fPath}");
         }
         else
         {

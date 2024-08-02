@@ -69,7 +69,7 @@ public class CustomFileLogger : ILogger
         var message = formatter(state, exception);
 
         // Write log messages to text file
-        _logFileWriter.WriteLine($"[{logLevel}] [{_categoryName}] {message}");
+        _logFileWriter.WriteLine($"[{DateTime.Now}][{_categoryName}] {message}");
         _logFileWriter.Flush();
     }
 }

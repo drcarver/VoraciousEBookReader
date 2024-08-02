@@ -1,17 +1,18 @@
 ﻿using CsvHelper.Configuration;
 using VoraciousEBookReader.Gutenberg.Model;
+using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Map
 {
     /// <summary>
     /// The CSV map for the Gutenberg catalog
     /// </summary>
-    internal sealed class GutenbergCatalogEntryMap : ClassMap<GutenbergCatalogEntry>
+    internal sealed class GutenbergCatalogEntryViewModelMap : ClassMap<GutenbergCatalogEntryViewModel>
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        internal GutenbergCatalogEntryMap()
+        internal GutenbergCatalogEntryViewModelMap()
         {
             Map(x => x.EbookNumber).Name("Text#");
             Map(x => x.EPubType).Name("Type");

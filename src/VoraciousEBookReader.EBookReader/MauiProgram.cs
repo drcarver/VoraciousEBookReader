@@ -5,6 +5,8 @@ using CommunityToolkit.Maui;
 
 using Microsoft.Extensions.Logging;
 
+using VoraciousEBookReader.EBookReader.Interface;
+using VoraciousEBookReader.EBookReader.ViewModel;
 using VoraciousEBookReader.Gutenberg;
 
 namespace VoraciousEBookReader.EBookReader;
@@ -36,6 +38,9 @@ public static class MauiProgram
             });
 
         builder.Services
+            .AddHttpClient()
+            .AddSingleton<IMainPageViewModel, MainPageViewModel>()
+            .AddSingletonWithShellRoute<MainPage, MainPageViewModel>(nameof(MainPage))
             .UseGutenbergCatalog();
         
         return builder.Build();
