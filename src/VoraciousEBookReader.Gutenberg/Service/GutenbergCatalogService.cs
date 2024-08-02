@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using VoraciousEBookReader.Gutenberg.Interface;
 using VoraciousEBookReader.Gutenberg.Map;
 using VoraciousEBookReader.Gutenberg.Model;
+using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Service;
 
@@ -40,7 +41,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
     /// The catalog entry
     /// </summary>
     [ObservableProperty]
-    private GutenbergCatalog gutenbergCatalog = new GutenbergCatalog();
+    private GutenbergCatalogViewModel gutenbergCatalog = new GutenbergCatalogViewModel();
 
     /// <summary>
     /// Read the Gutenberg catalog
@@ -91,6 +92,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             Directory.CreateDirectory(fileInfo?.DirectoryName);
             logger.LogInformation($"Loading catalog from {fPath}");
             HttpClient client = HttpClientFactory.CreateClient();
+            var list = new List<GutenbergCatalogEntry>();
             using (var streamReader = new StreamReader(await client.GetStreamAsync(CATALOGURL)))
             {
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -103,7 +105,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                 using (var csv = new CsvReader(streamReader, config))
                 {
                     csv.Context.RegisterClassMap<GutenbergCatalogEntryMap>();
-                    GutenbergCatalog.Catalog = csv.GetRecords<GutenbergCatalogEntry>().ToList<GutenbergCatalogEntry>();
+                    list = csv.GetRecords<GutenbergCatalogEntry>().ToList();
                 }
             }
             GutenbergCatalog.LastUpdated = DateTime.Now;
@@ -124,6 +126,11 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             }
             // delete the uncompressed list
             File.Delete(fPath);
+
+            foreach (var item in list)
+            {
+                GutenbergCatalog.Catalog.Add(new GutenbergCatalogEntryViewModel(item));
+            }
         }
         catch (Exception ex)
         {
@@ -150,7 +157,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                 {
                     using (GZipStream decompressionStream = new GZipStream(compressedFileStream, CompressionMode.Decompress))
                     {
-                        GutenbergCatalog = await JsonSerializer.DeserializeAsync<GutenbergCatalog>(decompressionStream);
+                        GutenbergCatalog = await JsonSerializer.DeserializeAsync<GutenbergCatalogViewModel>(decompressionStream);
                     }
                 }
             }

@@ -1,4 +1,4 @@
-﻿using VoraciousEBookReader.Gutenberg.Model;
+﻿using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Interface;
 
@@ -7,7 +7,7 @@ public interface IGutenbergCatalogService
     /// <summary>
     /// The Gutenberg catalog
     /// </summary>
-    GutenbergCatalog GutenbergCatalog { get; set; }
+    GutenbergCatalogViewModel GutenbergCatalog { get; set; }
 
     /// <summary>
     /// Read the Gutenberg catalog

@@ -1,8 +1,7 @@
-﻿using ObjCRuntime;
-
-using UIKit;
+﻿using UIKit;
 
 namespace VoraciousEBookReader.EBookReader;
+
 public class Program
 {
     // This is the main entry point of the application.

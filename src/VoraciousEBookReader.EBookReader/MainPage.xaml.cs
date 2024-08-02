@@ -1,4 +1,6 @@
-﻿namespace VoraciousEBookReader.EBookReader;
+﻿using VoraciousEBookReader.Gutenberg.Interface;
+
+namespace VoraciousEBookReader.EBookReader;
 
 public partial class MainPage : ContentPage
 {

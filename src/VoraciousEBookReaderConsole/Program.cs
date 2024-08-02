@@ -23,7 +23,6 @@ internal class Program
         builder.Configuration.AddCommandLine(args);
 
         builder.Services
-            .AddHttpClient()
             .UseGutenbergCatalog();
 
         using IHost host = builder.Build();
@@ -35,30 +34,3 @@ internal class Program
         await host.RunAsync();
     }
 }
-
-//string fPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)}\\VoraciousEBookReader\\{PGCATALOG}";
-//var fileInfo = new FileInfo(fPath);
-//Directory.CreateDirectory(fileInfo?.DirectoryName);
-//if (!File.Exists(fPath + ".gz"))
-//{
-//    var sw = new Stopwatch();
-//    var catalog = new CatalogViewModel(null);
-//    sw.Start();
-//    await catalog();
-//    sw.Stop();
-//}
-
-//// now read it back
-//var sw3 = new Stopwatch();
-//sw3.Start();
-//var list = new List<CatalogEntry>();
-//using (FileStream compressedFileStream = File.Open(fPath + ".gz", FileMode.Open))
-//{
-//    using (GZipStream decompressionStream = new GZipStream(compressedFileStream, CompressionMode.Decompress))
-//    {
-//        list = JsonSerializer.Deserialize<List<CatalogEntry>>(decompressionStream);
-//    }
-//}
-//sw3.Stop();
-////File.Delete(fPath + ".gz");
-//Console.WriteLine("Hello, World!");

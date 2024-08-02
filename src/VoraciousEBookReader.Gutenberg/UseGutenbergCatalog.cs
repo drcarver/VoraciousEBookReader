@@ -18,7 +18,7 @@ namespace VoraciousEBookReader.Gutenberg
             //collection
             // Add all the game table types as transient
             collection
-                .AddTransient<IGutenbergCatalogEntry, CatalogEntryViewModel>()
+                .AddTransient<IGutenbergCatalogEntry, GutenbergCatalogEntryViewModel>()
                 .AddSingleton<IGutenbergCatalogService, GutenbergCatalogService>()
                 ;
 

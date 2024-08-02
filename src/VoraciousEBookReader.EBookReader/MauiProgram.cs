@@ -1,8 +1,11 @@
-﻿using CommunityToolkit.Maui;
+﻿using System.Diagnostics;
+using System.IO;
+
+using CommunityToolkit.Maui;
 
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog;
+
+using VoraciousEBookReader.Gutenberg;
 
 namespace VoraciousEBookReader.EBookReader;
 
@@ -10,12 +13,19 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        //Log.Logger = new LoggerConfiguration()
-        //    .Enrich.FromLogContext()
-        //    .WriteTo.Console()
-        //    .CreateLogger();
-
         var builder = MauiApp.CreateBuilder();
+
+        //Add a custom log provider to write logs to text files
+        var dir = $"{Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)}\\VoraciousEBookReader\\";
+        Directory.CreateDirectory(dir);
+        string fPath = $"{dir}\\EBookReader.logfile.txt";
+        builder.Logging.AddProvider(new FileLogger(fPath));
+
+#if DEBUG
+        builder.Logging
+            .AddDebug();
+#endif
+
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
@@ -25,10 +35,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-#if DEBUG
-		builder.Logging.AddDebug();
-#endif
-
+        builder.Services
+            .UseGutenbergCatalog();
+        
         return builder.Build();
     }
 }

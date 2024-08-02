@@ -5,7 +5,7 @@ using VoraciousEBookReader.Gutenberg.Model;
 
 namespace VoraciousEBookReader.Gutenberg.ViewModel
 {
-    public partial class CatalogEntryViewModel : ObservableObject, IGutenbergCatalogEntry
+    public partial class GutenbergCatalogEntryViewModel : ObservableObject, IGutenbergCatalogEntry
     {
         [ObservableProperty]
         private string authors;
@@ -38,7 +38,7 @@ namespace VoraciousEBookReader.Gutenberg.ViewModel
         /// Constructor
         /// </summary>
         /// <param name="entry">The catalog entry to create</param>
-        public CatalogEntryViewModel(GutenbergCatalogEntry entry)
+        public GutenbergCatalogEntryViewModel(IGutenbergCatalogEntry entry)
         {
             Authors = entry.Authors;
             Bookshelves = entry.Bookshelves;
@@ -49,13 +49,6 @@ namespace VoraciousEBookReader.Gutenberg.ViewModel
             LoCC = entry.LoCC;
             Subjects = entry.Subjects;
             Title = entry.Title;
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CatalogEntryViewModel()
-        {
         }
     }
 }
