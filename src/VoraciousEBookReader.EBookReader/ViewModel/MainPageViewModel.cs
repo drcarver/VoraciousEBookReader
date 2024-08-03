@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using Microsoft.Extensions.Logging;
+
 using VoraciousEBookReader.EBookReader.Interface;
 using VoraciousEBookReader.Gutenberg.Interface;
 
@@ -8,9 +9,16 @@ namespace VoraciousEBookReader.EBookReader.ViewModel;
 
 public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
 {
-    public ILogger Logger { get; }
+    /// <summary>
+    /// The Logger interface
+    /// </summary>
+    private ILogger Logger { get; }
 
-    public IGutenbergCatalogService Service { get; }
+    /// <summary>
+    /// The Catalog service
+    /// </summary>
+    [ObservableProperty]
+    private IGutenbergCatalogService catalogService;
 
     /// <summary>
     /// THe title of the application
@@ -28,6 +36,6 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         IGutenbergCatalogService service) 
     {
         Logger = loggerFactory.CreateLogger<MainPage>();
-        Service = service;
+        CatalogService = service;
     }
 }

@@ -125,7 +125,9 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                     }
                 }
             }
-            // delete the uncompressed list
+
+            // post process the list
+            PostProcess();
             File.Delete(fPath);
         }
         catch (Exception ex)
@@ -133,6 +135,44 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             logger.LogError($"Error {ex.Message} loading catalog from {fPath}");
             throw ex;
         }
+    }
+
+    /// <summary>
+    /// Breakout the individual search criteria 
+    /// </summary>
+    private void PostProcess()
+    {
+        // Process the subjects
+        GutenbergCatalog.CatalogSubjects.Clear();
+        var rawSubjects = GutenbergCatalog.Catalog.Where(s => !string.IsNullOrEmpty(s.Subjects));
+        foreach (var rawSubject in rawSubjects)
+        {
+            var individualSubjects = rawSubject.Subjects.Split(';');
+            foreach (var individualSubject in individualSubjects)
+            {
+                if (!GutenbergCatalog.CatalogSubjects.Contains(individualSubject))
+                {
+                    GutenbergCatalog.CatalogSubjects.Add(individualSubject);
+                }
+            }
+        }
+        GutenbergCatalog.CatalogSubjects = new ObservableCollection<string>(GutenbergCatalog.CatalogSubjects.OrderBy(o => o));
+
+        // Process the bookshelves
+        GutenbergCatalog.CatalogSubjects.Clear();
+        var rawBookshelves = GutenbergCatalog.Catalog.Where(s => !string.IsNullOrEmpty(s.Bookshelves));
+        foreach (var rawBookShelf in rawBookshelves)
+        {
+            var individualbooks = rawBookShelf.Bookshelves.Split(';');
+            foreach (var individualBook in individualbooks)
+            {
+                if (!GutenbergCatalog.BookShelves.Contains(individualBook))
+                {
+                    GutenbergCatalog.BookShelves.Add(individualBook);
+                }
+            }
+        }
+        GutenbergCatalog.BookShelves = new ObservableCollection<string>(GutenbergCatalog.BookShelves.OrderBy(o => o));
     }
 
     /// <summary>
@@ -156,6 +196,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                         GutenbergCatalog = await JsonSerializer.DeserializeAsync<GutenbergCatalogViewModel>(decompressionStream);
                     }
                 }
+                PostProcess();
             }
             catch (Exception ex)
             {

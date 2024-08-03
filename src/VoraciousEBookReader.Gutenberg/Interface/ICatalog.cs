@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 using VoraciousEBookReader.Gutenberg.Model;
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
@@ -16,4 +18,19 @@ public interface ICatalog
     /// The date and time the catalog was last downloaded
     /// </summary>
     DateTime LastUpdated { get; set; }
+
+    /// <summary>
+    /// LastUpdated as a string
+    /// </summary>
+    string LastUpdatedString { get; }
+
+    /// <summary>
+    /// The available subjects
+    /// </summary>
+    ObservableCollection<string> CatalogSubjects { get; }
+
+    /// <summary>
+    /// The available book shelves
+    /// </summary>
+    ObservableCollection<string> BookShelves { get; }
 }

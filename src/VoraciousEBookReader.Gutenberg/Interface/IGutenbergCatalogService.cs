@@ -1,4 +1,6 @@
-﻿using VoraciousEBookReader.Gutenberg.ViewModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Interface;
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -20,4 +21,22 @@ public partial class GutenbergCatalogViewModel : ObservableObject, ICatalog
     /// </summary>
     [ObservableProperty]
     private DateTime lastUpdated;
+
+    /// <summary>
+    /// Return the Last Updated formatted as a long string
+    /// </summary>
+    public string LastUpdatedString => LastUpdated.ToString("D",
+                  CultureInfo.CreateSpecificCulture("en-US"));
+
+    /// <summary>
+    /// The available book shelves
+    /// </summary>
+    [ObservableProperty]
+    private ObservableCollection<string> bookShelves = [];
+
+    /// <summary>
+    /// The available subjects
+    /// </summary>
+    [ObservableProperty]
+    private ObservableCollection<string> catalogSubjects = [];
 }
