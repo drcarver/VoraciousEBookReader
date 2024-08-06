@@ -3,40 +3,162 @@ using System.Globalization;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using Microsoft.Extensions.Logging;
+
 using VoraciousEBookReader.Gutenberg.Interface;
-using VoraciousEBookReader.Gutenberg.Model;
 
 namespace VoraciousEBookReader.Gutenberg.ViewModel;
 
 public partial class GutenbergCatalogViewModel : ObservableObject, ICatalog
 {
     /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="loggerFactory">The logger factory</param>
+    public GutenbergCatalogViewModel(ILoggerFactory loggerFactory)
+    {
+        logger = loggerFactory.CreateLogger<GutenbergCatalogViewModel>();
+    }
+
+    /// <summary>
+    /// Return the Last Updated formatted as a long string
+    /// </summary>
+    //[ObservableProperty]
+    //private string lastUpdatedString = LastUpdated.ToString("D", CultureInfo.CreateSpecificCulture("en-US"));
+
+    /// <summary>
+    /// Add the item to shelves dictionary
+    /// </summary>
+    /// <param name="item">The item to add</param>
+    private void AddShelves(GutenbergCatalogEntryViewModel item)
+    {
+        foreach (var shelf in item.BookShelves)
+        {
+            if (!Shelves.ContainsKey(shelf))
+            {
+                Shelves.Add(shelf, []);
+            }
+            Shelves[shelf].Add(item);
+        }
+    }
+
+    /// <summary>
+    /// Add the item to the languages dictionary
+    /// </summary>
+    /// <param name="item">The item to add</param>
+    private void AddLanguages(GutenbergCatalogEntryViewModel item)
+    {
+        foreach (var key in item.BookLanguages)
+        {
+            if (!Languages.ContainsKey(key))
+            {
+                Languages.Add(key, []);
+            }
+            Languages[key].Add(item);
+        }
+    }
+
+    /// <summary>
+    /// Add the item to the authors dictionary
+    /// </summary>
+    /// <param name="item">The item to add</param>
+    private void AddAuthors(GutenbergCatalogEntryViewModel item)
+    {
+        foreach (var key in item.BookAuthors)
+        {
+            if (!Authors.ContainsKey(key))
+            {
+                Authors.Add(key, []);
+            }
+            Authors[key].Add(item);
+        }
+    }
+
+    /// <summary>
+    /// Add the subjects to the subjects dictionary
+    /// </summary>
+    /// <param name="item">The subject to add</param>
+    private void AddSubjects(GutenbergCatalogEntryViewModel item)
+    {
+        foreach (var key in item.BookSubjects)
+        {
+            if (!Subjects.ContainsKey(key))
+            {
+                Subjects.Add(key, []);
+            }
+            Subjects[key].Add(item);
+        }
+
+    }
+
+    /// <summary>
+    /// Create the index for the catalogs
+    /// </summary>
+    public void CreateIndexes()
+    {
+        // Create the index for authors
+        foreach (var item in Catalog.Where(i => i.BookAuthors.Any()))
+        {
+            AddAuthors(item);
+        }
+
+        // Create the languages index
+        foreach (var item in Catalog.Where(i => i.BookLanguages.Any()))
+        {
+            AddLanguages(item);
+        }
+
+        // Create the subjects index
+        foreach (var item in Catalog.Where(i => i.BookSubjects.Any()))
+        {
+            AddSubjects(item);
+        }
+
+        // Create the subjects index
+        foreach (var item in Catalog.Where(i => i.BookShelves.Any()))
+        {
+            AddShelves(item);
+        }
+    }
+
+    /// <summary>`
+    /// The logger 
+    /// </summary>
+    private ILogger<GutenbergCatalogViewModel> logger;
+
+    /// <summary>
     /// The catalog.  These are refreshed every week 
     /// </summary>
     [ObservableProperty]
-    private ObservableCollection<GutenbergCatalogEntryViewModel> catalog = [];
+    private ObservableCollection<GutenbergCatalogEntryViewModel> catalog;
 
     /// <summary>
     /// The date and time the catalog was downloaded
     /// </summary>
     [ObservableProperty]
     private DateTime lastUpdated;
-
+    
     /// <summary>
-    /// Return the Last Updated formatted as a long string
+    /// The available Languages
     /// </summary>
-    public string LastUpdatedString => LastUpdated.ToString("D",
-                  CultureInfo.CreateSpecificCulture("en-US"));
+    [ObservableProperty]
+    private Dictionary<CultureInfo, List<GutenbergCatalogEntryViewModel>> languages = [];
 
     /// <summary>
     /// The available book shelves
     /// </summary>
     [ObservableProperty]
-    private ObservableCollection<string> bookShelves = [];
+    private Dictionary<string, List<GutenbergCatalogEntryViewModel>> shelves = [];
 
     /// <summary>
     /// The available subjects
     /// </summary>
     [ObservableProperty]
-    private ObservableCollection<string> catalogSubjects = [];
+    private Dictionary<string, List<GutenbergCatalogEntryViewModel>> subjects = [];
+
+    /// <summary>
+    /// The available authors
+    /// </summary>
+    [ObservableProperty]
+    private Dictionary<string, List<GutenbergCatalogEntryViewModel>> authors = [];
 }

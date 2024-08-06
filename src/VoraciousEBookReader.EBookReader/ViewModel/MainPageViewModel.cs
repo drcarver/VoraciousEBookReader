@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 using Microsoft.Extensions.Logging;
 
@@ -25,6 +26,15 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// </summary>
     [ObservableProperty]
     private string title = "Voracious Ebook Reader";
+
+    /// <summary>
+    /// The async command for the load catalog button
+    /// </summary>
+    [RelayCommand]
+    private async Task LoadCatalog()
+    {
+        await CatalogService.LoadLocalCatalogAsync();
+    }
 
     /// <summary>
     /// Constructor

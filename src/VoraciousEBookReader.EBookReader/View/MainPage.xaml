@@ -16,11 +16,14 @@
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="Center">
                 <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:DataGridTextColumn HeaderText="Title" MappingName="Title" Width="600" />
+                    <syncfusion:DataGridTextColumn HeaderText="Title" MappingName="BookTitle" Width="1000" />
                     <!--<syncfusion:DataGridTextColumn HeaderText="Language" MappingName="Language" Width="100" />-->
                 </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
-            <Label Text="{Binding CatalogService.GutenbergCatalog.LastUpdatedString}" TextColor="Black" BackgroundColor="AntiqueWhite"
+            <Label  Text="{Binding CatalogService.GutenbergCatalog.LastUpdated}" 
+                    TextColor="Black" BackgroundColor="AntiqueWhite"
+                    VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Button Text="Load Catalog" Command="{Binding LoadCatalogCommand}"
                    VerticalOptions="Center" HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ContentPage.Content>

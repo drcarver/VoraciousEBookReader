@@ -1,5 +1,5 @@
 ﻿using CsvHelper.Configuration;
-using VoraciousEBookReader.Gutenberg.Model;
+
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Map
@@ -14,15 +14,15 @@ namespace VoraciousEBookReader.Gutenberg.Map
         /// </summary>
         internal GutenbergCatalogEntryViewModelMap()
         {
-            Map(x => x.EbookNumber).Name("Text#");
-            Map(x => x.EPubType).Name("Type");
-            Map(x => x.Issued).Name("Issued");
-            Map(x => x.Title).Name("Title");
+            Map(x => x.BookNumber).Name("Text#");
+            Map(x => x.BookEPubType).Name("Type");
+            Map(x => x.BookDateIssued).Name("Issued");
+            Map(x => x.BookTitle).Name("Title");
+            Map(x => x.BookLOCC).Name("LoCC");
             Map(x => x.Language).Name("Language");
-            Map(x => x.Authors).Name("Authors");
-            Map(x => x.Subjects).Name("Subjects");
-            Map(x => x.LoCC).Name("LoCC");
-            Map(x => x.Bookshelves).Name("Bookshelves");
+            Map(x => x.Author).Name("Authors");
+            Map(x => x.Subject).Name("Subjects");
+            Map(x => x.Shelf).Name("Bookshelves");
         }
     }
 }

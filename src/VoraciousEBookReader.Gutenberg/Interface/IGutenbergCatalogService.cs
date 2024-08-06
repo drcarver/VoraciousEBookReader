@@ -9,7 +9,7 @@ public interface IGutenbergCatalogService
     /// <summary>
     /// The Gutenberg catalog
     /// </summary>
-    GutenbergCatalogViewModel GutenbergCatalog { get; set; }
+    ICatalog GutenbergCatalog { get; set; }
 
     /// <summary>
     /// Read the Gutenberg catalog

@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
 using System.IO.Compression;
-using System.Text;
 using System.Text.Json;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,12 +9,10 @@ using CommunityToolkit.Mvvm.Input;
 using CsvHelper;
 using CsvHelper.Configuration;
 
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using Microsoft.Extensions.Logging;
 
 using VoraciousEBookReader.Gutenberg.Interface;
 using VoraciousEBookReader.Gutenberg.Map;
-using VoraciousEBookReader.Gutenberg.Model;
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Service;
@@ -45,7 +41,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
     /// The catalog entry
     /// </summary>
     [ObservableProperty]
-    private GutenbergCatalogViewModel gutenbergCatalog = new GutenbergCatalogViewModel();
+    private ICatalog gutenbergCatalog;
 
     /// <summary>
     /// Read the Gutenberg catalog
@@ -74,13 +70,15 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
     /// </summary>
     /// <param name="loggerFactory">The logger factory</param>
     /// <param name="httpClientFactory">The HTTP client factory</param>
+    /// <param name="catalog">The catalog</param>
     public GutenbergCatalogService(
         ILoggerFactory loggerFactory,
-        IHttpClientFactory httpClientFactory)
+        IHttpClientFactory httpClientFactory,
+        ICatalog catalog)
     {
         logger = loggerFactory.CreateLogger<GutenbergCatalogService>();
         HttpClientFactory = httpClientFactory;
-        _ = LoadLocalCatalogAsync();
+        GutenbergCatalog = catalog;
     }
 
     /// <summary>
@@ -103,7 +101,7 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                 Delimiter = ",", 
                 BadDataFound = null, 
                 MissingFieldFound = null 
-            }; 
+            };
             using (var csv = new CsvReader(new StreamReader(await client.GetStreamAsync(CATALOGURL)), config))
             {
                 csv.Context.RegisterClassMap<GutenbergCatalogEntryViewModelMap>();
@@ -112,7 +110,11 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             GutenbergCatalog.LastUpdated = DateTime.Now;
             logger.LogInformation($"Loaded catalog with {GutenbergCatalog.Catalog.Count} entries.");
 
-            string json = JsonSerializer.Serialize(GutenbergCatalog);
+            // Process all the indexes of the catalog
+            GutenbergCatalog.CreateIndexes();
+
+            // save off the category collection
+            string json = JsonSerializer.Serialize(GutenbergCatalog.Catalog);
             File.WriteAllText(fPath, json);
             using (var originalFileStream = File.Open(fPath, FileMode.Open))
             {
@@ -125,9 +127,6 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
                     }
                 }
             }
-
-            // post process the list
-            PostProcess();
             File.Delete(fPath);
         }
         catch (Exception ex)
@@ -135,44 +134,6 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
             logger.LogError($"Error {ex.Message} loading catalog from {fPath}");
             throw ex;
         }
-    }
-
-    /// <summary>
-    /// Breakout the individual search criteria 
-    /// </summary>
-    private void PostProcess()
-    {
-        // Process the subjects
-        GutenbergCatalog.CatalogSubjects.Clear();
-        var rawSubjects = GutenbergCatalog.Catalog.Where(s => !string.IsNullOrEmpty(s.Subjects));
-        foreach (var rawSubject in rawSubjects)
-        {
-            var individualSubjects = rawSubject.Subjects.Split(';');
-            foreach (var individualSubject in individualSubjects)
-            {
-                if (!GutenbergCatalog.CatalogSubjects.Contains(individualSubject))
-                {
-                    GutenbergCatalog.CatalogSubjects.Add(individualSubject);
-                }
-            }
-        }
-        GutenbergCatalog.CatalogSubjects = new ObservableCollection<string>(GutenbergCatalog.CatalogSubjects.OrderBy(o => o));
-
-        // Process the bookshelves
-        GutenbergCatalog.CatalogSubjects.Clear();
-        var rawBookshelves = GutenbergCatalog.Catalog.Where(s => !string.IsNullOrEmpty(s.Bookshelves));
-        foreach (var rawBookShelf in rawBookshelves)
-        {
-            var individualbooks = rawBookShelf.Bookshelves.Split(';');
-            foreach (var individualBook in individualbooks)
-            {
-                if (!GutenbergCatalog.BookShelves.Contains(individualBook))
-                {
-                    GutenbergCatalog.BookShelves.Add(individualBook);
-                }
-            }
-        }
-        GutenbergCatalog.BookShelves = new ObservableCollection<string>(GutenbergCatalog.BookShelves.OrderBy(o => o));
     }
 
     /// <summary>
@@ -186,23 +147,24 @@ public partial class GutenbergCatalogService : ObservableObject, IGutenbergCatal
         if (File.Exists(fPath))
         {
             logger.LogInformation($"Loading catalog from {fPath}");
-            GutenbergCatalog.Catalog.Clear();
             try
             {
                 using (FileStream compressedFileStream = File.Open(fPath, FileMode.Open))
                 {
                     using (GZipStream decompressionStream = new GZipStream(compressedFileStream, CompressionMode.Decompress))
                     {
-                        GutenbergCatalog = await JsonSerializer.DeserializeAsync<GutenbergCatalogViewModel>(decompressionStream);
+                        GutenbergCatalog.Catalog = await JsonSerializer.DeserializeAsync<ObservableCollection<GutenbergCatalogEntryViewModel>>(decompressionStream);
                     }
                 }
-                PostProcess();
             }
             catch (Exception ex)
             {
                 logger.LogError($"Error {ex.Message} loading catalog from {fPath}");
                 throw ex;
             }
+            FileInfo fInfo = new FileInfo(fPath);
+            GutenbergCatalog.LastUpdated = fInfo.LastWriteTime;
+            GutenbergCatalog.CreateIndexes();
             logger.LogInformation($"Loaded catalog from {fPath}");
         }
         else

@@ -20,6 +20,7 @@ namespace VoraciousEBookReader.Gutenberg
             collection
                 .AddTransient<IGutenbergCatalogEntry, GutenbergCatalogEntryViewModel>()
                 .AddSingleton<IGutenbergCatalogService, GutenbergCatalogService>()
+                .AddSingleton<ICatalog, GutenbergCatalogViewModel>()
                 ;
 
             return collection;
