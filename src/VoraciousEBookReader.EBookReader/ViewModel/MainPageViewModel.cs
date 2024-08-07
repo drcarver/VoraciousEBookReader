@@ -34,7 +34,17 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     private async Task LoadCatalog()
     {
         await CatalogService.LoadLocalCatalogAsync();
+        if (CatalogService.GutenbergCatalog.Catalog.Any())
+        {
+            LoadCommandText = "Click to Refresh Catalog";
+        }
     }
+
+    /// <summary>
+    /// The text for the load command
+    /// </summary>
+    [ObservableProperty]
+    private string loadCommandText = "Click to Load Catalog";
 
     /// <summary>
     /// Constructor

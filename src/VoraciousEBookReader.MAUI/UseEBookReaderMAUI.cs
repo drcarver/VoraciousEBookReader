@@ -20,9 +20,15 @@ public static class DataServices
         //collection
         // Add all the game table types as transient
         collection
-            .AddSingletonWithShellRoute<GutenbergCatalogView, GutenbergCatalogViewModel>(nameof(GutenbergCatalogView));
+            .AddSingletonWithShellRoute<GutenbergCatalogView, GutenbergCatalogViewModel>(nameof(GutenbergCatalogView))
+            .AddSingletonWithShellRoute<LanguageView, LanguageViewModel>(nameof(LanguageView))
         ;
 
         return collection;
+    }
+
+    private static void AddSingletonWithShellRoute<T1, T2>(string v)
+    {
+        throw new NotImplementedException();
     }
 }

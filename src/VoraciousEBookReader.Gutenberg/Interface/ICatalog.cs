@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.Globalization;
 
+using VoraciousEBookReader.EBookReader.Interface;
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Interface;
@@ -26,7 +27,7 @@ public interface ICatalog
     /// <summary>
     /// The available Languages
     /// </summary>
-    Dictionary<CultureInfo, List<GutenbergCatalogEntryViewModel>> Languages { get; set; }
+    ILanguages LanguagesInCatalog { get; set; }
 
     /// <summary>
     /// The available book shelves

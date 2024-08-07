@@ -4,26 +4,31 @@
              x:Class="VoraciousEBookReader.EBookReader.MainPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:VoraciousEBookReader.EBookReader.ViewModel;assembly=VoraciousEBookReader.EBookReader"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              x:DataType="viewmodel:MainPageViewModel"
              Title="{Binding Title}">
-    
+
     <ContentPage.Content>
         <VerticalStackLayout>
-            <syncfusion:SfDataGrid x:Name="dataGrid"
+            <syncfusion:SfListView x:Name="listView"
                     ItemsSource="{Binding CatalogService.GutenbergCatalog.Catalog}"
-                    AutoGenerateColumnsMode="None"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="Center">
-                <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:DataGridTextColumn HeaderText="Title" MappingName="BookTitle" Width="1000" />
-                    <!--<syncfusion:DataGridTextColumn HeaderText="Language" MappingName="Language" Width="100" />-->
-                </syncfusion:SfDataGrid.Columns>
-            </syncfusion:SfDataGrid>
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.6*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Title}" TextColor="Teal" FontSize="15"/>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
             <Label  Text="{Binding CatalogService.GutenbergCatalog.LastUpdated}" 
                     TextColor="Black" BackgroundColor="AntiqueWhite"
                     VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Button Text="Load Catalog" Command="{Binding LoadCatalogCommand}"
+            <Button Text="{Binding LoadCommandText}" Command="{Binding LoadCatalogCommand}"
                    VerticalOptions="Center" HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ContentPage.Content>

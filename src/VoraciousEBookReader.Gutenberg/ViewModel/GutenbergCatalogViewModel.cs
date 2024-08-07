@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 using Microsoft.Extensions.Logging;
 
+using VoraciousEBookReader.EBookReader.Interface;
 using VoraciousEBookReader.Gutenberg.Interface;
 
 namespace VoraciousEBookReader.Gutenberg.ViewModel;
@@ -15,16 +16,13 @@ public partial class GutenbergCatalogViewModel : ObservableObject, ICatalog
     /// Constructor
     /// </summary>
     /// <param name="loggerFactory">The logger factory</param>
-    public GutenbergCatalogViewModel(ILoggerFactory loggerFactory)
+    public GutenbergCatalogViewModel(
+        ILoggerFactory loggerFactory,
+        ILanguages languages)
     {
         logger = loggerFactory.CreateLogger<GutenbergCatalogViewModel>();
+        LanguagesInCatalog = languages;
     }
-
-    /// <summary>
-    /// Return the Last Updated formatted as a long string
-    /// </summary>
-    //[ObservableProperty]
-    //private string lastUpdatedString = LastUpdated.ToString("D", CultureInfo.CreateSpecificCulture("en-US"));
 
     /// <summary>
     /// Add the item to shelves dictionary
@@ -50,11 +48,11 @@ public partial class GutenbergCatalogViewModel : ObservableObject, ICatalog
     {
         foreach (var key in item.BookLanguages)
         {
-            if (!Languages.ContainsKey(key))
+            if (!LanguagesInCatalog.Languages.ContainsKey(key))
             {
-                Languages.Add(key, []);
+                LanguagesInCatalog.Languages.Add(key, []);
             }
-            Languages[key].Add(item);
+            LanguagesInCatalog.Languages[key].Add(item);
         }
     }
 
@@ -136,13 +134,13 @@ public partial class GutenbergCatalogViewModel : ObservableObject, ICatalog
     /// The date and time the catalog was downloaded
     /// </summary>
     [ObservableProperty]
-    private DateTime lastUpdated;
-    
+    private DateTime lastUpdated = DateTime.Now;
+
     /// <summary>
     /// The available Languages
     /// </summary>
     [ObservableProperty]
-    private Dictionary<CultureInfo, List<GutenbergCatalogEntryViewModel>> languages = [];
+    private ILanguages languagesInCatalog;
 
     /// <summary>
     /// The available book shelves
