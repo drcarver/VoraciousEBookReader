@@ -1,12 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Text.Json.Serialization;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using VoraciousEBookReader.Gutenberg.Interface;
+using VoraciousEBookReader.EBookReader.Interface;
 
-namespace VoraciousEBookReader.Gutenberg.ViewModel;
+namespace VoraciousEBookReader.Gutenberg.Interface;
 
 public partial class GutenbergCatalogEntryViewModel : ObservableObject, IGutenbergCatalogEntry
 {
@@ -68,28 +67,28 @@ public partial class GutenbergCatalogEntryViewModel : ObservableObject, IGutenbe
     /// The language(s) of the books as cultureInfo entries
     /// </summary>
     [ObservableProperty]
-    [property: JsonIgnore]
+    //[property: JsonIgnore]
     private ObservableCollection<CultureInfo> bookLanguages = [];
 
     /// <summary>
     /// The subjects(s) of the book
     /// </summary>
     [ObservableProperty]
-    [property: JsonIgnore]
+    //[property: JsonIgnore]
     private ObservableCollection<string> bookSubjects = [];
 
     /// <summary>
     /// The book shelves the book is on
     /// </summary>
     [ObservableProperty]
-    [property: JsonIgnore]
+    //[property: JsonIgnore]
     private ObservableCollection<string> bookShelves = [];
 
     /// <summary>
     /// The authors of the book
     /// </summary>
     [ObservableProperty]
-    [property: JsonIgnore]
+    //[property: JsonIgnore]
     private ObservableCollection<string> bookAuthors = [];
 
     /// <summary>
@@ -192,7 +191,12 @@ public partial class GutenbergCatalogEntryViewModel : ObservableObject, IGutenbe
             {
                 foreach (var individualLanguage in individualLanguages)
                 {
-                    var key = CultureInfo.CreateSpecificCulture(individualLanguage.ToUpper().Trim());
+                    var keyString = individualLanguage.ToUpper().Trim();
+                    if (string.IsNullOrEmpty(keyString))
+                    {
+                        keyString = "en";
+                    }
+                    var key = CultureInfo.CreateSpecificCulture(keyString);
                     if (key != null && !BookLanguages.Contains(key))
                     {
                         BookLanguages.Add(key);

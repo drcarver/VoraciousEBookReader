@@ -1,16 +1,15 @@
 ﻿using System.Collections.ObjectModel;
-using System.Globalization;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using Microsoft.Extensions.Logging;
 
-using VoraciousEBookReader.EBookReader.Interface;
 using VoraciousEBookReader.Gutenberg.Interface;
+using VoraciousEBookReader.Gutenberg.ViewModel;
 
-namespace VoraciousEBookReader.Gutenberg.ViewModel;
+namespace VoraciousEBookReader.EBookReader.ViewModel;
 
-public partial class GutenbergCatalogViewModel : ObservableObject, ICatalog
+public partial class GutenbergCatalogViewModel : BaseViewModel, ICatalog
 {
     /// <summary>
     /// Constructor

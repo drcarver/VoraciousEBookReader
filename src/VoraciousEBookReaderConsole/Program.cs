@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 using VoraciousEBookReader.Gutenberg;
 using VoraciousEBookReader.Gutenberg.Interface;
+using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReaderConsole;
 

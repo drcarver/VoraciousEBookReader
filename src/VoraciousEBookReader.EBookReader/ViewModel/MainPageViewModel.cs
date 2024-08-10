@@ -4,11 +4,13 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 
 using VoraciousEBookReader.EBookReader.Interface;
+using VoraciousEBookReader.EBookReader.View;
 using VoraciousEBookReader.Gutenberg.Interface;
+using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.EBookReader.ViewModel;
 
-public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
+public partial class MainPageViewModel : BaseViewModel, IMainPageViewModel
 {
     /// <summary>
     /// The Logger interface
@@ -38,6 +40,16 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         {
             LoadCommandText = "Click to Refresh Catalog";
         }
+    }
+
+    /// <summary>
+    /// Go to the settings page 
+    /// </summary>
+    /// <returns></returns>
+    [RelayCommand]
+    private async Task Settings()
+    {
+        await Shell.Current.GoToAsync(nameof(LanguageView));
     }
 
     /// <summary>

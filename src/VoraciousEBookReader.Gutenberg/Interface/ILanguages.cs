@@ -3,10 +3,15 @@ using System.Globalization;
 
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
-namespace VoraciousEBookReader.EBookReader.Interface;
+namespace VoraciousEBookReader.Gutenberg.Interface;
 
-public interface ILanguages
+public interface ILanguages 
 {
+    /// <summary>
+    /// The title of the view
+    /// </summary>
+    string Title { get; }
+
     /// <summary>
     /// The books in each language in the catalog
     /// </summary>

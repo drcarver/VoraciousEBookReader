@@ -1,5 +1,6 @@
 ﻿using CsvHelper.Configuration;
 
+using VoraciousEBookReader.Gutenberg.Interface;
 using VoraciousEBookReader.Gutenberg.ViewModel;
 
 namespace VoraciousEBookReader.Gutenberg.Map

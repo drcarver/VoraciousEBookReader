@@ -1,11 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Globalization;
 
 using VoraciousEBookReader.EBookReader.Interface;
-using VoraciousEBookReader.Gutenberg.ViewModel;
+using VoraciousEBookReader.Gutenberg.Interface;
 
-namespace VoraciousEBookReader.Gutenberg.Interface;
+namespace VoraciousEBookReader.Gutenberg.ViewModel;
 
 public interface ICatalog
 {

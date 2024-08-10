@@ -1,14 +1,14 @@
-﻿using System.Diagnostics;
-using System.IO;
-
-using CommunityToolkit.Maui;
-using Syncfusion.Maui.Core.Hosting;
+﻿using CommunityToolkit.Maui;
 
 using Microsoft.Extensions.Logging;
 
+using Syncfusion.Maui.Core.Hosting;
+
 using VoraciousEBookReader.EBookReader.Interface;
+using VoraciousEBookReader.EBookReader.View;
 using VoraciousEBookReader.EBookReader.ViewModel;
 using VoraciousEBookReader.Gutenberg;
+using VoraciousEBookReader.Gutenberg.Interface;
 
 namespace VoraciousEBookReader.EBookReader;
 
@@ -41,8 +41,10 @@ public static class MauiProgram
 
         builder.Services
             .AddHttpClient()
+            .AddSingleton<ILanguages, LanguageViewModel>()
             .AddSingleton<IMainPageViewModel, MainPageViewModel>()
             .AddSingletonWithShellRoute<MainPage, MainPageViewModel>(nameof(MainPage))
+            .AddSingletonWithShellRoute<LanguageView, LanguageViewModel>(nameof(LanguageView))
             .UseGutenbergCatalog();
         
         return builder.Build();

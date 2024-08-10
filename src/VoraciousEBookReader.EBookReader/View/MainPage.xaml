@@ -1,26 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VoraciousEBookReader.EBookReader.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:VoraciousEBookReader.EBookReader.ViewModel;assembly=VoraciousEBookReader.EBookReader"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:culture="clr-namespace:System.Globalization;assembly=System.Globalization"
+             x:Class="VoraciousEBookReader.EBookReader.MainPage"
              x:DataType="viewmodel:MainPageViewModel"
              Title="{Binding Title}">
 
     <ContentPage.Content>
         <VerticalStackLayout>
+            <ImageButton Source="gear.ico" Command="{Binding SettingsCommand}" 
+                         Background="Transparent" />
             <syncfusion:SfListView x:Name="listView"
-                    ItemsSource="{Binding CatalogService.GutenbergCatalog.Catalog}"
+                    ItemsSource="{Binding CatalogService.GutenbergCatalog.LanguagesInCatalog.Languages.Keys}"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="Center">
                 <syncfusion:SfListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="culture:CultureInfo">
                         <Grid Padding="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.6*" />
                             </Grid.RowDefinitions>
-                            <Label Text="{Binding Title}" TextColor="Teal" FontSize="15"/>
+                            <Label Text="{Binding EnglishName}" TextColor="Teal" FontSize="15"/>
                         </Grid>
                     </DataTemplate>
                 </syncfusion:SfListView.ItemTemplate>
