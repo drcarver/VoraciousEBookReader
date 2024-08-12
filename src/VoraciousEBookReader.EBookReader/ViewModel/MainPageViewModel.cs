@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 
 using Microsoft.Extensions.Logging;
 
+using Syncfusion.Maui.DataGrid;
+
 using VoraciousEBookReader.EBookReader.Interface;
 using VoraciousEBookReader.EBookReader.View;
 using VoraciousEBookReader.Gutenberg.Interface;
@@ -28,6 +30,23 @@ public partial class MainPageViewModel : BaseViewModel, IMainPageViewModel
     /// </summary>
     [ObservableProperty]
     private string title = "Voracious Ebook Reader";
+
+    /// <summary>
+    /// The height of the rows
+    /// </summary>
+    [ObservableProperty]
+    private double rowHeight = 0;
+
+    /// <summary>
+    /// Process the cell tapped command
+    /// </summary>
+    /// <param name="e">The event arguments</param>
+    /// <returns>The command Task</returns>
+    [RelayCommand]
+    private async Task CellTapped(DataGridCellTappedEventArgs e)
+    {
+        var data = (GutenbergCatalogEntryViewModel)e.RowData;
+    }
 
     /// <summary>
     /// The async command for the load catalog button

@@ -1,38 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:pager="clr-namespace:Syncfusion.Maui.DataGrid.DataPager;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:VoraciousEBookReader.EBookReader.ViewModel;assembly=VoraciousEBookReader.EBookReader"
+             xmlns:coreviewmodel="clr-namespace:VoraciousEBookReader.Gutenberg.ViewModel;assembly=VoraciousEBookReader.Gutenberg"
              xmlns:culture="clr-namespace:System.Globalization;assembly=System.Globalization"
              x:Class="VoraciousEBookReader.EBookReader.MainPage"
              x:DataType="viewmodel:MainPageViewModel"
              Title="{Binding Title}">
 
     <ContentPage.Content>
-        <VerticalStackLayout>
-            <ImageButton Source="gear.ico" Command="{Binding SettingsCommand}" 
-                         Background="Transparent" />
-            <syncfusion:SfListView x:Name="listView"
-                    ItemsSource="{Binding CatalogService.GutenbergCatalog.LanguagesInCatalog.Languages.Keys}"
-                    HorizontalOptions="StartAndExpand"
-                    VerticalOptions="Center">
-                <syncfusion:SfListView.ItemTemplate>
-                    <DataTemplate x:DataType="culture:CultureInfo">
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.6*" />
-                            </Grid.RowDefinitions>
-                            <Label Text="{Binding EnglishName}" TextColor="Teal" FontSize="15"/>
-                        </Grid>
-                    </DataTemplate>
-                </syncfusion:SfListView.ItemTemplate>
-            </syncfusion:SfListView>
-            <Label  Text="{Binding CatalogService.GutenbergCatalog.LastUpdated}" 
-                    TextColor="Black" BackgroundColor="AntiqueWhite"
-                    VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Button Text="{Binding LoadCommandText}" Command="{Binding LoadCatalogCommand}"
-                   VerticalOptions="Center" HorizontalOptions="Center"/>
-        </VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ImageButton Source="gear.ico" Command="{Binding SettingsCommand}" Grid.Row="0"/>
+            <pager:SfDataPager x:Name ="dataPager"
+                           Grid.Row="2"
+                           PageSize="30" 
+                           Source="{Binding CatalogService.GutenbergCatalog.LanguagesInCatalog.SelectedEntries}"
+                           UseOnDemandPaging="True">
+            </pager:SfDataPager>
+            <syncfusion:SfDataGrid x:Name="dataGrid" AutoGenerateColumnsMode="None"
+                    Grid.Row="1" SelectionMode="Single"
+                    RowHeight="{Binding RowHeight}"
+                    ItemsSource="{Binding Source={x:Reference dataPager}, Path=PagedSource}"
+                    QueryRowHeight="dataGrid_QueryRowHeight"
+                    CellTappedCommand="{Binding CellTappedCommand}" >
+                <syncfusion:SfDataGrid.Behaviors>
+                    <toolkit:EventToCommandBehavior />
+                </syncfusion:SfDataGrid.Behaviors>
+                <syncfusion:SfDataGrid.SortColumnDescriptions>
+                    <syncfusion:SortColumnDescription ColumnName="BookTitle" SortDirection="Ascending" />
+                </syncfusion:SfDataGrid.SortColumnDescriptions>
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:DataGridTextColumn 
+                        HeaderText="Title" MappingName="BookTitle" Width="600"
+                        MaximumWidth="550" LineBreakMode="TailTruncation" />
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+            <Button x:Name="btnLoad"  Text="{Binding LoadCommandText}" Command="{Binding LoadCatalogCommand}" 
+                    Grid.Row="3" />
+            <core:SfBusyIndicator IsRunning="{Binding Source={x:Reference btnLoad} }" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

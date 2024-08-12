@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 using VoraciousEBookReader.EBookReader.Interface;
 
-namespace VoraciousEBookReader.Gutenberg.Interface;
+namespace VoraciousEBookReader.Gutenberg.ViewModel;
 
 public partial class GutenbergCatalogEntryViewModel : ObservableObject, IGutenbergCatalogEntry
 {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-             xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"            
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:VoraciousEBookReader.Gutenberg.ViewModel;assembly=VoraciousEBookReader.Gutenberg"
              xmlns:mainviewmodel="clr-namespace:VoraciousEBookReader.EBookReader.ViewModel;assembly=VoraciousEBookReader.EBookReader"
@@ -20,17 +19,5 @@
             Placeholder="Search here to filter"/>
         <!--/>SearchCommand="{Binding SearchCommand}" 
             />/>SearchCommandParameter="{Binding Text}" />-->
-        <syncfusion:SfListView x:Name="listView" 
-                ItemsSource="{Binding Languages.Keys}"
-                Grid.Row="1"
-            >
-            <syncfusion:SfListView.DataSource>
-                <data:DataSource>
-                    <data:DataSource.SortDescriptors>
-                        <data:SortDescriptor PropertyName="Description" Direction="Ascending"/>
-                    </data:DataSource.SortDescriptors>
-                </data:DataSource>
-            </syncfusion:SfListView.DataSource>
-        </syncfusion:SfListView>
     </Grid>
 </ContentPage>

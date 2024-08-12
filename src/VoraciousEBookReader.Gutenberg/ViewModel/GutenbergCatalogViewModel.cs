@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -29,13 +30,15 @@ public partial class GutenbergCatalogViewModel : BaseViewModel, ICatalog
     /// <param name="item">The item to add</param>
     private void AddShelves(GutenbergCatalogEntryViewModel item)
     {
+
         foreach (var shelf in item.BookShelves)
         {
-            if (!Shelves.ContainsKey(shelf))
+            var key = shelf.ToUpper().Trim();
+            if (!Shelves.ContainsKey(key))
             {
-                Shelves.Add(shelf, []);
+                Shelves.Add(key, []);
             }
-            Shelves[shelf].Add(item);
+            Shelves[key].Add(item);
         }
     }
 
@@ -45,6 +48,7 @@ public partial class GutenbergCatalogViewModel : BaseViewModel, ICatalog
     /// <param name="item">The item to add</param>
     private void AddLanguages(GutenbergCatalogEntryViewModel item)
     {
+        LanguagesInCatalog.SelectedEntries.Clear();
         foreach (var key in item.BookLanguages)
         {
             if (!LanguagesInCatalog.Languages.ContainsKey(key))
@@ -61,8 +65,9 @@ public partial class GutenbergCatalogViewModel : BaseViewModel, ICatalog
     /// <param name="item">The item to add</param>
     private void AddAuthors(GutenbergCatalogEntryViewModel item)
     {
-        foreach (var key in item.BookAuthors)
+        foreach (var author in item.BookAuthors)
         {
+            var key = author.ToUpper().Trim();
             if (!Authors.ContainsKey(key))
             {
                 Authors.Add(key, []);
@@ -77,8 +82,9 @@ public partial class GutenbergCatalogViewModel : BaseViewModel, ICatalog
     /// <param name="item">The subject to add</param>
     private void AddSubjects(GutenbergCatalogEntryViewModel item)
     {
-        foreach (var key in item.BookSubjects)
+        foreach (var subject in item.BookSubjects)
         {
+            var key = subject.ToUpper().Trim();
             if (!Subjects.ContainsKey(key))
             {
                 Subjects.Add(key, []);
@@ -104,6 +110,10 @@ public partial class GutenbergCatalogViewModel : BaseViewModel, ICatalog
         {
             AddLanguages(item);
         }
+        LanguagesInCatalog.SelectedLanguages.Clear();
+        var english = new CultureInfo("en-US");
+        LanguagesInCatalog.SelectedLanguages.Add(english);
+        LanguagesInCatalog.SelectedEntries = LanguagesInCatalog.Languages[english];
 
         // Create the subjects index
         foreach (var item in Catalog.Where(i => i.BookSubjects.Any()))
