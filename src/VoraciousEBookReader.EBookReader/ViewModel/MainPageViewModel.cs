@@ -45,7 +45,12 @@ public partial class MainPageViewModel : BaseViewModel, IMainPageViewModel
     [RelayCommand]
     private async Task CellTapped(DataGridCellTappedEventArgs e)
     {
-        var data = (GutenbergCatalogEntryViewModel)e.RowData;
+        GutenbergCatalogEntryViewModel data = (GutenbergCatalogEntryViewModel)e.RowData;
+        var navigationParameter = new ShellNavigationQueryParameters
+        {
+            { "data", data }
+        };
+        await Shell.Current.GoToAsync(nameof(WebViewPage), navigationParameter);
     }
 
     /// <summary>

@@ -41,10 +41,12 @@ public static class MauiProgram
 
         builder.Services
             .AddHttpClient()
+            .AddTransient<IWebViewModel, WebViewModel>()
             .AddSingleton<ILanguages, LanguageViewModel>()
             .AddSingleton<IMainPageViewModel, MainPageViewModel>()
             .AddSingletonWithShellRoute<MainPage, MainPageViewModel>(nameof(MainPage))
             .AddSingletonWithShellRoute<LanguageView, LanguageViewModel>(nameof(LanguageView))
+            .AddTransientWithShellRoute<WebViewPage, WebViewModel>(nameof(WebViewPage))
             .UseGutenbergCatalog();
         
         return builder.Build();
