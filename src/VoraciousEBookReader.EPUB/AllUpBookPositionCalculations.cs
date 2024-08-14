@@ -1,6 +1,6 @@
-﻿namespace VoraciousEBookReader.EBookReader;
+﻿namespace VoraciousEBookReader.EPUB;
 
-class AllUpBookPositionCalculations
+public class AllUpBookPositionCalculations
 {
     private List<double> SectionSizes = null;
     public void SetSectionSizes(List<double> value)

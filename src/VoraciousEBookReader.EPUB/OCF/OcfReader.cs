@@ -8,8 +8,14 @@ namespace VoraciousEBookReader.EPUB.OCF
     {
         public static OcfDocument Read(XDocument xml)
         {
-            if (xml == null) throw new ArgumentNullException(nameof(xml));
-            if (xml.Root == null) throw new ArgumentException("XML document has no root element.", nameof(xml));
+            if (xml == null)
+            {
+                throw new ArgumentNullException(nameof(xml));
+            }
+            if (xml.Root == null)
+            {
+                throw new ArgumentException("XML document has no root element.", nameof(xml));
+            }
 
             var rootFiles = xml.Root?.Element(OcfElements.RootFiles)?.Elements(OcfElements.RootFile);
             var ocf = new OcfDocument

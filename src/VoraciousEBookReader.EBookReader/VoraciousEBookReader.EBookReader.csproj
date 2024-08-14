@@ -64,6 +64,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Assets\PreinstalledBooks\**" />
+	  <Compile Remove="Assets\PreinstalledBooks\**" />
+	  <EmbeddedResource Remove="Assets\PreinstalledBooks\**" />
+	  <MauiCss Remove="Assets\PreinstalledBooks\**" />
+	  <MauiXaml Remove="Assets\PreinstalledBooks\**" />
+	  <None Remove="Assets\PreinstalledBooks\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Remove="BookHandler.cs" />
 	  <Compile Remove="BookLocation.cs" />
 	  <Compile Remove="EpubBookExt.cs" />
@@ -109,11 +118,6 @@
 	  <None Remove="Assets\HelpScreenShots\295-Search-Elements.png" />
 	  <None Remove="Assets\InitialBooks.zip" />
 	  <None Remove="Assets\LockScreenLogo.scale-200.png" />
-	  <None Remove="Assets\PreinstalledBooks\Alices_Adventures_in_by_Carroll_Lewis.EPUB" />
-	  <None Remove="Assets\PreinstalledBooks\Meditations_by_Marcus_Aurelius_Emperor.EPUB" />
-	  <None Remove="Assets\PreinstalledBooks\Narrative_of_the_Life_by_Douglass_Frederick.EPUB" />
-	  <None Remove="Assets\PreinstalledBooks\The_Adventures_of_Sherlock_by_Doyle_Arthur_Conan.EPUB" />
-	  <None Remove="Assets\PreinstalledBooks\The_Mysterious_Affair_by_Christie_Agatha.EPUB" />
 	  <None Remove="Assets\SplashScreen.scale-200.png" />
 	  <None Remove="Assets\Square150x150Logo.scale-200.png" />
 	  <None Remove="Assets\Square44x44Logo.scale-200.png" />
@@ -263,21 +267,6 @@
 	  <Content Include="Resources\AppIcon\Wide310x150Logo.scale-125.png" />
 	  <Content Include="Resources\AppIcon\Wide310x150Logo.scale-150.png" />
 	  <Content Include="Assets\LockScreenLogo.scale-200.png" />
-	  <Content Include="Assets\PreinstalledBooks\Alices_Adventures_in_by_Carroll_Lewis.EPUB">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Assets\PreinstalledBooks\Meditations_by_Marcus_Aurelius_Emperor.EPUB">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Assets\PreinstalledBooks\Narrative_of_the_Life_by_Douglass_Frederick.EPUB">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Assets\PreinstalledBooks\The_Adventures_of_Sherlock_by_Doyle_Arthur_Conan.EPUB">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Assets\PreinstalledBooks\The_Mysterious_Affair_by_Christie_Agatha.EPUB">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
 	  <Content Include="Assets\SplashScreen.scale-200.png" />
 	  <Content Include="Assets\Square150x150Logo.scale-200.png" />
 	  <Content Include="Assets\Square44x44Logo.scale-200.png" />
